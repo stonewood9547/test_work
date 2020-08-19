@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Тестовое задание</title>
+    <style>
+    table{
+        width: 100%;
+        border-collapse:collapse;
+        border-spacing:0
+        }
+        table, td{
+        border: 1px solid black;
+        }
+
+    </style>
+
+</head>
+<body>
+<h1>Заголовок</h1>
+
+<table>
+    <tr>
+        <td style="width: 150px;align-content: center;">Имя пользователя</td>
+        <td style="width: 350px;align-content: center;">тема поста</td>
+        <td>текст поста</td>
+    </tr>
+    {% for item in info %}
+        <tr>
+            <td>{{item.name}}</td> <td>{{item.title}}</td> <td>{{item.body}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+
+
+</body>
+</html>
