@@ -48,18 +48,21 @@ def index(request):
                                     bs=user['company']['bs'],
                                     )
             company_data.save()
-
+            
     #Заполняем базу данными постов
     for post in posts:
         if post['id'] not in posts_all:
-            user = Users.objects.get(user_id=post['userId'])
-            posts_data = Posts(user_id=Users(post['userId']),
-                                post_id=post['id'],
-                                title=post['title'],
-                                body=post['body'],
-                                username=user.username,
-                                )
-            posts_data.save()
+            if post not in Posts_db:
+                for usr in Users_db:
+                    if usr.user_id == post['userId']:
+                        name = usr.username
+                        posts_data = Posts(user_id=Users(post['userId']),
+                                            post_id=post['id'],
+                                            title=post['title'],
+                                            body=post['body'],
+                                            username=name,
+                                            )
+                        posts_data.save()
 
     #Вывод данных на страницу
     all_posts = []
@@ -68,7 +71,7 @@ def index(request):
             'name': post.username,
             'title': post.title,
             'body':post.body,
-            }
+        }
         all_posts.append(data)
     
     context = {'info':all_posts}
