@@ -2,6 +2,7 @@ import json
 import requests
 from django.shortcuts import render
 from .models import Posts, Users, Adress, Company
+from django.core import exceptions
 
 
 # Create your views here.
@@ -10,19 +11,11 @@ def index(request):
     users = json.loads(requests.get('http://jsonplaceholder.typicode.com/users').content)
     posts = json.loads(requests.get('http://jsonplaceholder.typicode.com/posts').content)
     
-    #Проверка какие данные уже есть в БД
-    users_all = []
-    posts_all = []
-    Users_db = Users.objects.all()
-    Posts_db = Posts.objects.all()
-    for usr in Users_db:
-        users_all.append(usr.user_id)
-    for pst in Posts_db:
-        posts_all.append(pst.post_id)
-        
     #Заполняем базу данными юзеров
     for user in users:
-        if user['id'] not in users_all:
+        try:
+            user_temp = Users.objects.get(user_id=user['id'])
+        except exceptions.ObjectDoesNotExist:
             user_data = Users(user_id=user['id'],
                                 name=user['name'],
                                 username=user['username'],
@@ -51,22 +44,21 @@ def index(request):
             
     #Заполняем базу данными постов
     for post in posts:
-        if post['id'] not in posts_all:
-            if post not in Posts_db:
-                for usr in Users_db:
-                    if usr.user_id == post['userId']:
-                        name = usr.username
-                        posts_data = Posts(user_id=Users(post['userId']),
-                                            post_id=post['id'],
-                                            title=post['title'],
-                                            body=post['body'],
-                                            username=name,
-                                            )
-                        posts_data.save()
+        try:
+            post_temp = Posts.objects.get(post_id=post['id'])
+        except exceptions.ObjectDoesNotExist: 
+            user = Users.objects.get(user_id=post['userId'])
+            posts_data = Posts(user_id=Users(post['userId']),
+                                post_id=post['id'],
+                                title=post['title'],
+                                body=post['body'],
+                                username=user.username,
+                                )
+            posts_data.save()
 
     #Вывод данных на страницу
     all_posts = []
-    for post in Posts_db:
+    for post in Posts.objects.all():
         data = {
             'name': post.username,
             'title': post.title,
