@@ -13,3 +13,11 @@ def index(request):
 def test(request):
     context = {'info':Posts.get_data(self=Posts)}
     return(render(request, 'test.html', context))
+
+def test1(request):
+    context = {'info':Posts.get_data(self=Posts)}
+    return(render(request, 'test1.html', context))
+
+def test2(request):
+    context = {'info':Posts.get_data(self=Posts)}
+    return(render(request, 'test2.html', context))

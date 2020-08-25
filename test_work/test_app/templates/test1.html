@@ -7,9 +7,9 @@
     <title>Test</title>
     <style>
       body { background: rgb(61, 58, 58) !important;}
-      .carousel-inner > .carousel-item > img {
-    width: 100%; ;
-}
+      .carousel-inner > .carousel-item > img {width: 100%; ;}
+      table{background-color: white;border-width: 5px !important;}
+      td{border-width: 5px;border-color: black !important;}
     </style>
   </head>
   <body>
@@ -23,16 +23,16 @@
       </ul>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <a href="/test"><img src="https://i.imgur.com/qlBokGm.jpg" width="1100" height="500" ></a>
-          <div class="carousel-caption">
-            <h2 class="text-danger bg-dark">Dark table</h2>
-        </div>
+            <a href="/test"><img src="https://i.imgur.com/qlBokGm.jpg" width="1100" height="500" ></a>
+            <div class="carousel-caption">
+                <h2 class="text-danger bg-dark">Dark table</h2>
+            </div>
         </div>
         <div class="carousel-item">
-          <a href="test1"><img src="https://i.imgur.com/pOGkgyS.jpg" width="1100" height="500"></a>
-          <div class="carousel-caption">
-            <h2 class="text-danger bg-dark">White table</h2>
-        </div>
+            <a href="test1"><img src="https://i.imgur.com/pOGkgyS.jpg" width="1100" height="500"></a>
+            <div class="carousel-caption" style="width: 80;">
+                <h2 class="text-danger bg-dark">White table</h2>
+            </div>
         </div>
       </div>
       <a class="carousel-control-prev" href="#demo" data-slide="prev">
@@ -47,7 +47,7 @@
     </div>
 
     <div class="container ">
-      <table class="table table-dark table-striped">
+      <table class="table-striped table-bordered">
         <thead>
           <tr>
             <th>Username</th>
