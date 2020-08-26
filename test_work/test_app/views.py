@@ -16,8 +16,11 @@ def test(request):
 
 def test1(request):
     context = {'info':Posts.get_data(self=Posts)}
+    context['borders'] = "table-striped table-bordered"
     return(render(request, 'test1.html', context))
 
-def test2(request):
-    context = {'info':Posts.get_data(self=Posts)}
-    return(render(request, 'test2.html', context))
+
+def search(request):
+    query = request.GET.get('search')
+    context = {'info':Posts.objects.get(username=query)}
+    return (render(request, 'test.html', context))
