@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+  {%block head%}
+    <title>Test</title>
+    <style>
+      body { background: rgb(61, 58, 58) !important;}
+      .carousel-inner > .carousel-item > img {width: 100%;}
+    </style>
+  {%endblock head%}
+  {%block body%}
+    <div class="container ">
+      <table class="{{borders}}">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Post theme</th>
+            <th>Post text</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in info %}
+            <tr>
+                <td>{{item.name}}</td> <td>{{item.title}}</td> <td>{{item.body}}</td>
+            </tr>
+          {% endfor %} 
+        </tbody>
+        </table>
+  {%endblock body%}

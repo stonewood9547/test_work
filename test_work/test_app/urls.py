@@ -3,6 +3,8 @@ from . import views
 
 urlpatterns = [
     path('', views.index), 
-    path('test',views.test),
-    path('test1',views.test1),  
+    path('black_table',views.black_table),
+    path('white_table',views.white_table), 
+    path(r'^color=/$',views.color_table,name = "table_color"),
+    path(r'^place_search/$', views.search,name="place_search"), 
 ]

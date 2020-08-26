@@ -10,17 +10,27 @@ def index(request):
     context = {'info':Posts.get_data(self=Posts)}
     return(render(request, 'index.html', context))
 
-def test(request):
+def black_table(request):
     context = {'info':Posts.get_data(self=Posts)}
-    return(render(request, 'test.html', context))
+    context['borders'] = "table table-dark table-striped"
+    return(render(request, 'black.html', context))
 
-def test1(request):
+def white_table(request):
     context = {'info':Posts.get_data(self=Posts)}
     context['borders'] = "table-striped table-bordered"
-    return(render(request, 'test1.html', context))
-
+    return(render(request, 'white.html', context))
 
 def search(request):
     query = request.GET.get('search')
-    context = {'info':Posts.objects.get(username=query)}
-    return (render(request, 'test.html', context))
+    try:
+        data = {'info':Posts.objects.all().filter(username=query)}
+    except:
+        data = {}
+    data['borders'] = "table table-dark table-striped"
+    return (render(request, 'black.html', context=data))
+
+def color_table(request):
+    query = request.GET.get('color')
+    context = {'info':Posts.get_data(self=Posts)}
+    context['borders'] = query
+    return(render(request, 'white.html', context))
