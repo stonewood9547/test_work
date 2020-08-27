@@ -22,7 +22,7 @@
           <a class="nav-link" href="#">Link 3</a>
         </li>
       </ul>
-      <form class="form-inline" action="{% url "place_search" %}" method="GET">
+      <form class="form-inline" action="{% url "search" %}" method="GET">
           <input name="search" class="form-control mr-sm-2" type="text" placeholder="Search by username">
           <button class="btn btn-success" type="submit">Search</button>
       </form>
@@ -37,7 +37,6 @@
       </ul>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <!-- <form action="{% url "table_color" %}" method="GET"> -->
           <a href="http://localhost:8000/black_table"><img src="https://i.imgur.com/qlBokGm.jpg" width="1100" height="500" ></a>
           <div class="carousel-caption">
             <h2 class="text-danger bg-dark">Dark table</h2>

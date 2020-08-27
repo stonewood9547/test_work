@@ -13,24 +13,20 @@ def index(request):
 def black_table(request):
     context = {'info':Posts.get_data(self=Posts)}
     context['borders'] = "table table-dark table-striped"
-    return(render(request, 'black.html', context))
+    return(render(request, 'bootstrap.html', context))
 
 def white_table(request):
     context = {'info':Posts.get_data(self=Posts)}
     context['borders'] = "table-striped table-bordered"
-    return(render(request, 'white.html', context))
+    context['style'] = r'body { background: rgb(61, 58, 58) !important;} .carousel-inner > .carousel-item > img {width: 100%; ;} table{background-color: white;border-width: 5px !important; td{border-width: 5px;border-color: black !important;}}'
+    return(render(request, 'bootstrap.html', context))
 
 def search(request):
     query = request.GET.get('search')
-    try:
-        data = {'info':Posts.objects.all().filter(username=query)}
-    except:
-        data = {}
-    data['borders'] = "table table-dark table-striped"
-    return (render(request, 'black.html', context=data))
-
-def color_table(request):
-    query = request.GET.get('color')
-    context = {'info':Posts.get_data(self=Posts)}
-    context['borders'] = query
-    return(render(request, 'white.html', context))
+    context = {}
+    if query != '':
+        context = {'info':Posts.objects.all().filter(username=query)}
+    else:
+        context["info"] = {'name':'ERROR','title':'Nothing found','body':'empty search request'}
+    context['borders'] = "table table-dark table-striped"
+    return (render(request, 'bootstrap.html', context))
